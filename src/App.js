@@ -16,6 +16,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "Firebase", "Unity Game Services", "API Rest", "IA"],
       role: "Desarrollador | Diseñador",
       fullDescription: "",
+      platform: "Plataforma: Unity Editor"
     },
     {
       id: 2,
@@ -25,24 +26,27 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "Firebase", "Unity Game Services", "API Rest", "IA"],
       role: "Desarrollador | UX/UI",
       fullDescription: "",
+      platform: "Plataforma: Webgl - Android - iOS - Windows - Mac"
     },
     {
       id: 3,
       title: "Tower of Ashen Souls - En Progreso",
       description: "Es un tower defense oscuro donde enfrentás hordas de esqueletos y criaturas malditas mientras defendés la última torre que resguarda las almas del mundo.",
       image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&h=400&fit=crop",
-      technologies: ["Unity", "C#", "Unity Game Services"],
+      technologies: ["Unity", "C#", "Unity Game Services", "Unity ADS"],
       role: "Desarrollador | Diseñador",
       fullDescription: "En Tower of Ashen Souls, el equilibrio entre la vida y la muerte está al borde del colapso. Las fuerzas de las cenizas <<esqueletos, espectros y bestias corruptas>> emergen sin descanso para reclamar la torre ancestral que contiene las almas de los caídos.Como guardián de este bastión, debés construir defensas, mejorar tus torres y dominar habilidades especiales para resistir oleada tras oleada de enemigos. Cada decisión estratégica define si la torre perdura… o si las almas que protege se desvanecen para siempre.Un mundo oscuro, criaturas implacables y una ambientación cargada de tensión hacen de este juego una experiencia intensa de estrategia y supervivencia.",
+      platform: "Plataforma: Android - iOS"
     },
     {
       id: 4,
       title: "Numverse 2048 - Finalizado",
       description: "Numverse 2048 es un juego de rompecabezas, con una combinación de disparar cubos y hacer coincidir números.",
       image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&h=400&fit=crop",
-      technologies: ["Unity", "C#", "Playfab"],
+      technologies: ["Unity", "C#", "Playfab", "Unity ADS", "Unity In-App Purchase"],
       role: "Desarrollador | Diseñador",
       fullDescription: "Numverse 2048 es un juego de rompecabezas, con una combinación de disparar cubos y hacer coincidir números.",
+      platform: "Plataforma: Android"
     },
     {
       id: 5,
@@ -52,6 +56,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#"],
       role: "Desarrollador | Diseño de Nivel",
       fullDescription: "Juegate la vida es un proyecto que trata de promocionar la Salud Mental a través de la prevención de la Ansiedad, Depresión,Adicciones y el Sucidio.",
+      platform: "Plataforma: Webgl - Windows"
     },
     {
       id: 6,
@@ -61,6 +66,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#"],
       role: "Desarrollador | Diseño de Nivel",
       fullDescription: "Boxed Monster es un proyecto que trata de promocionar la Salud Mental a través de la prevención de la Ansiedad, Depresión,Adicciones y el Sucidio.",
+      platform: "Plataforma: Cardboard"
     },
     {
       id: 7,
@@ -70,6 +76,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador | Diseñador",
       fullDescription: "Empty es un videojuego de rompecabezas, donde el jugador debe evitar que su personaje caiga al vacío, cuando el jugador llegue a ciertos check point, el juego se torna mas difícil, y cambia según el chekc point.",
+      platform: "Plataforma: Android"
     },
     {
       id: 8,
@@ -79,6 +86,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "MongoDB", "VR"],
       role: "Desarrollador | Diseño de Nivel",
       fullDescription: "Hace mucho tiempo en 8 islas misteriosos algunos fragmentos del mapa del tesoro celestial quedaron ocultos, al parecer las islas han salido a flote, y como buenos piratas que somos, vamos a por ese tesoro.",
+      platform: "Plataforma: Meta Quest 2"
     },
     {
       id: 9,
@@ -88,6 +96,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "Unity Game Services", "PlayFab"],
       role: "Desarrollador",
       fullDescription: "Visualización de las torres de apartamentos de Terrace Park, donde se pueden visualizar las áreas importantes de la torre, y de igual forma cada apartamento de esta.",
+      platform: "Plataforma: Webgl"
     },
     {
       id: 10,
@@ -97,6 +106,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador",
       fullDescription: "Proyecto que se especializa en visualizar diferentes proyectos de apartamentos, mostrando su información y fotos de manera detallada",
+      platform: "Plataforma: Webgl - Windows"
     },
     {
       id: 11,
@@ -106,6 +116,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador",
       fullDescription: "Representación de apartamento Jayedo en una vista 360°",
+      platform: "Plataforma: Webgl - Windows"
     },
     {
       id: 12,
@@ -115,6 +126,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador",
       fullDescription: "Representación de apartamento Rosé en una vista 360°",
+      platform: "Plataforma: Webgl - Windows"
     },
     {
       id: 13,
@@ -124,6 +136,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador",
       fullDescription: "Representación de apartamento Rosé en una vista 360°",
+      platform: "Plataforma: Webgl - Windows"
     },
     {
       id: 14,
@@ -133,6 +146,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador",
       fullDescription: "",
+      platform: "Plataforma: Webgl - Windows"
     },
     {
       id: 15,
@@ -142,6 +156,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab", "VR"],
       role: "Desarrollador",
       fullDescription: "",
+      platform: "Plataforma: Meta Quest 2 - Oculus Rift"
     },
     {
       id: 16,
@@ -151,6 +166,7 @@ const Portfolio = () => {
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador",
       fullDescription: "Visualización de muebles con edición de color y texturas.",
+      platform: "Plataforma: Webgl - Windows"
     }
   ];
 
@@ -372,9 +388,12 @@ const courses = [
                         <h3 className="text-xl font-bold text-white mb-2">
                           {project.title}
                         </h3>
-                        <p className="text-sm text-gray-300">
+                        <p className="text-sm text-gray-100 mb-3">
                           {project.description}
                         </p>
+                        <h1 className="text-sm text-gray-400">
+                          {project.platform}
+                        </h1>
                       </div>
                     </div>
                     
