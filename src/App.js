@@ -310,7 +310,7 @@ const Portfolio = () => {
           <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-[#228BE6] to-[#5ce1e6] flex items-center justify-center">
             <Gamepad2 className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
           </div>
-          <span className="text-white font-semibold text-lg lg:text-xl">Euclides</span>
+          <span className="text-white font-semibold text-lg lg:text-xl">Euclides Martinez</span>
         </div>
         
         {/* Menú Desktop */}
