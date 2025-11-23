@@ -1,11 +1,24 @@
-import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, X, Code, Gamepad2, Layers, Award, BookOpen } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, X, Code, Gamepad2, Layers, Award, BookOpen, Menu } from 'lucide-react';
 
 const Portfolio = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const timelineRef = useRef(null);
+
+  // Detectar si es móvil
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const projects = [
     {
@@ -68,7 +81,7 @@ const Portfolio = () => {
       image: process.env.PUBLIC_URL + "/assets/juegateLaVida.mp4",
       technologies: ["Unity", "C#"],
       role: "Desarrollador | Diseño de Nivel",
-      fullDescription: "“Juegate la vida” es un proyecto interactivo orientado a la promoción de la salud mental y la prevención de la ansiedad, depresión, adicciones y el suicidio. A través de experiencias y dinámicas educativas, busca generar conciencia y brindar herramientas para el bienestar emocional.",
+      fullDescription: "Juegate la vida es un proyecto interactivo orientado a la promoción de la salud mental y la prevención de la ansiedad, depresión, adicciones y el suicidio. A través de experiencias y dinámicas educativas, busca generar conciencia y brindar herramientas para el bienestar emocional.",
       platform: "Plataforma: Webgl - Windows"
     },
     {
@@ -167,7 +180,7 @@ const Portfolio = () => {
       image: process.env.PUBLIC_URL + "/assets/childrenPark.mp4",
       technologies: ["Unity", "C#", "PlayFab"],
       role: "Desarrollador",
-      fullDescription: "Children’s Park es una aplicación WebGL para explorar en 360° distintos elementos de parques. El usuario puede rotarlos, cambiar colores y personalizar detalles en tiempo real, ofreciendo una herramienta práctica para exhibición, diseño y selección de mobiliario urbano.",
+      fullDescription: "Children's Park es una aplicación WebGL para explorar en 360° distintos elementos de parques. El usuario puede rotarlos, cambiar colores y personalizar detalles en tiempo real, ofreciendo una herramienta práctica para exhibición, diseño y selección de mobiliario urbano.",
       platform: "Plataforma: Webgl - Windows"
     },
     {
@@ -190,8 +203,7 @@ const Portfolio = () => {
       role: "Desarrollador",
       fullDescription: "Furniture es una aplicación WebGL para visualizar muebles en 360°, permitiendo rotar los objetos y modificar colores y texturas en tiempo real. Diseñada para mostrar productos de manera interactiva, es ideal para catálogos digitales y exhibiciones de mobiliario en WebGL y Windows.",
       platform: "Plataforma: Webgl - Windows"
-    }
-    ,
+    },
     {
       id: 17,
       title: "Garbage VR - Finalizado",
@@ -208,6 +220,7 @@ const Portfolio = () => {
   const experience = [
     {
       year: "Oct 2022 - Actualidad",
+      title: "TGA Company",
       company: "TGA Company",
       role: "Unity Developer",
       description: "Participé en proyectos multiplataforma, entregando productos pulidos y envolventes.",
@@ -215,6 +228,7 @@ const Portfolio = () => {
     },
     {
       year: "Jul 2019 - Nov 2023",
+      title: "Parceros Games",
       company: "Parceros Games",
       role: "Co-Founder - Unity Developer - Project Manager",
       description: "Lideré el desarrollo de videojuegos para dispositivos móviles y PC",
@@ -222,6 +236,7 @@ const Portfolio = () => {
     },
     {
       year: "May 2019 - Abril 2021",
+      title: "Quandty S.A.S",
       company: "Quandty S.A.S",
       role: "Co-Founder - Unity Developer",
       description: "Dirigí el desarrollo de videojuegos de seguridad laboral en VR y AR.",
@@ -229,6 +244,7 @@ const Portfolio = () => {
     },
     {
       year: "Jul 2018 - Dic 2018",
+      title: "Arquitectos de Negocios",
       company: "Arquitectos de Negocios",
       role: "Analista Multimedia",
       description: "Diseñé y estructuré aplicaciones multimedia alineadas a objetivos empresariales.",
@@ -236,29 +252,23 @@ const Portfolio = () => {
     }
   ];
 
-const courses = [
-  { year: "Agosto 2022", title: "Curso profesional de Git y GitHub", institution: "Platzi", color: "#FF8A65" },
-  { year: "Agosto 2022", title: "Curso de testing de videojuegos", institution: "Platzi", color: "#4FC3F7" },
-
-  { year: "Octubre 2021", title: "Scrum Master", institution: "Udemy", color: "#9575CD" }, 
-  { year: "Abril 2021", title: "C# Avanzado", institution: "LinkedIn", color: "#FFB74D" }, 
-  { year: "Febrero 2021", title: "Tester de videojuegos", institution: "Fundación Carlos Slim", color: "#64B5F6" }, 
-  { year: "Febrero 2021", title: "RPG Core Combat Creator With Unity", institution: "Udemy", color: "#E57373" }, 
-
-  { year: "Agosto 2018", title: "Desarrollo de videojuegos", institution: "Fundación Carlos Slim", color: "#4DD0E1" }, 
-
-  { year: "Noviembre 2017", title: "The Ultimate Guide To Real World App With Unity", institution: "Udemy", color: "#BA68C8" }, 
-  { year: "Noviembre 2017 - Marzo 2018", title: "Introducción a las Herramientas y Competencias para la Generación de Innovación", institution: "UPV", color: "#FFD54F" }, 
-
-  { year: "Enero 2017 - Noviembre 2017", title: "Tecnólogo en Desarrollo de videojuegos", institution: "SENA", color: "#4DB6AC" },
-
-  { year: "Enero 2020", title: "Scrum Avanzado", institution: "LinkedIn", color: "#FFAB91" },
-];
-
+  const courses = [
+    { year: "Agosto 2022", title: "Curso profesional de Git y GitHub", institution: "Platzi", color: "#FF8A65" },
+    { year: "Agosto 2022", title: "Curso de testing de videojuegos", institution: "Platzi", color: "#4FC3F7" },
+    { year: "Octubre 2021", title: "Scrum Master", institution: "Udemy", color: "#9575CD" }, 
+    { year: "Abril 2021", title: "C# Avanzado", institution: "LinkedIn", color: "#FFB74D" }, 
+    { year: "Febrero 2021", title: "Tester de videojuegos", institution: "Fundación Carlos Slim", color: "#64B5F6" }, 
+    { year: "Febrero 2021", title: "RPG Core Combat Creator With Unity", institution: "Udemy", color: "#E57373" }, 
+    { year: "Agosto 2018", title: "Desarrollo de videojuegos", institution: "Fundación Carlos Slim", color: "#4DD0E1" }, 
+    { year: "Noviembre 2017", title: "The Ultimate Guide To Real World App With Unity", institution: "Udemy", color: "#BA68C8" }, 
+    { year: "Noviembre 2017 - Marzo 2018", title: "Introducción a las Herramientas y Competencias para la Generación de Innovación", institution: "UPV", color: "#FFD54F" }, 
+    { year: "Enero 2017 - Noviembre 2017", title: "Tecnólogo en Desarrollo de videojuegos", institution: "SENA", color: "#4DB6AC" },
+    { year: "Enero 2020", title: "Scrum Avanzado", institution: "LinkedIn", color: "#FFAB91" },
+  ];
 
   const scrollTimeline = (direction) => {
     if (timelineRef.current) {
-      const scrollAmount = 400;
+      const scrollAmount = isMobile ? 300 : 400;
       timelineRef.current.scrollBy({
         left: direction === 'right' ? scrollAmount : -scrollAmount,
         behavior: 'smooth'
@@ -286,23 +296,71 @@ const courses = [
     }
   };
 
+  // Función para navegar desde el móvil
+  const navigateToPage = (page) => {
+    setCurrentPage(page);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-gradient-radial from-[#2F3845] to-[#1B1B1B]">
-      {/* Navbar */}
-      <nav className="absolute top-0 left-0 right-0 z-40 flex items-center justify-between px-12 py-6">
+    <div className="relative w-full min-h-screen overflow-x-hidden bg-gradient-radial from-[#2F3845] to-[#1B1B1B]">
+      {/* Navbar Responsive */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-12 py-4 bg-[#1B1B1B]/90 backdrop-blur-md border-b border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#228BE6] to-[#5ce1e6] flex items-center justify-center">
-            <Gamepad2 className="w-6 h-6 text-white" />
+          <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-[#228BE6] to-[#5ce1e6] flex items-center justify-center">
+            <Gamepad2 className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
           </div>
+          <span className="text-white font-semibold text-lg lg:text-xl">Euclides</span>
         </div>
         
-        <div className="flex gap-8">
-          <button onClick={() => setCurrentPage(0)} className="text-gray-300 hover:text-[#228BE6] transition-colors">Inicio</button>
-          <button onClick={() => setCurrentPage(1)} className="text-gray-300 hover:text-[#228BE6] transition-colors">Trabajos</button>
-          <button onClick={() => setCurrentPage(2)} className="text-gray-300 hover:text-[#228BE6] transition-colors">Experiencia</button>
-          <button onClick={() => setCurrentPage(3)} className="text-gray-300 hover:text-[#228BE6] transition-colors">Cursos</button>
+        {/* Menú Desktop */}
+        <div className="hidden lg:flex gap-6">
+          {['Inicio', 'Trabajos', 'Experiencia', 'Cursos'].map((item, index) => (
+            <button 
+              key={item}
+              onClick={() => setCurrentPage(index)}
+              className={`px-3 py-2 rounded-lg transition-all duration-300 ${
+                currentPage === index 
+                  ? 'bg-[#228BE6] text-white' 
+                  : 'text-gray-300 hover:text-[#228BE6] hover:bg-white/5'
+              }`}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+
+        {/* Menú Móvil */}
+        <div className="lg:hidden">
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 rounded-lg bg-white/5 border border-white/10 text-white"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
       </nav>
+
+      {/* Menú Móvil Desplegable */}
+      {isMobileMenuOpen && (
+        <div className="fixed top-16 left-0 right-0 z-50 bg-[#1B1B1B]/95 backdrop-blur-md border-b border-white/10 lg:hidden">
+          <div className="flex flex-col p-4">
+            {['Inicio', 'Trabajos', 'Experiencia', 'Cursos'].map((item, index) => (
+              <button 
+                key={item}
+                onClick={() => navigateToPage(index)}
+                className={`px-4 py-3 text-left rounded-lg transition-all duration-300 ${
+                  currentPage === index 
+                    ? 'bg-[#228BE6] text-white' 
+                    : 'text-gray-300 hover:text-[#228BE6] hover:bg-white/5'
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Partículas de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -322,10 +380,10 @@ const courses = [
         ))}
       </div>
 
-      {/* Contenedor de páginas */}
-      <div className="relative h-full w-full">
-        
-        {/* PÁGINA 1: HERO */}
+      {/* Contenedor principal con padding para navbar */}
+      <div className="relative w-full pt-20 lg:pt-32 pb-32 min-h-screen">
+
+        {/* PÁGINA 1: HERO RESPONSIVE */}
         <div className={`absolute inset-0 transition-all duration-700 ${
           currentPage === 0 
             ? 'opacity-100 translate-x-0' 
@@ -333,49 +391,49 @@ const courses = [
               ? 'opacity-0 -translate-x-full' 
               : 'opacity-0 translate-x-full'
         }`}>
-          <div className="h-full flex items-center px-20">
-            <div className="max-w-3xl">
-              <div className="text-sm uppercase tracking-[0.3em] text-[#228BE6] font-semibold mb-6 font-light">
+          <div className="h-full flex items-center px-4 lg:px-20">
+            <div className="max-w-4xl w-full text-center lg:text-left">
+              <div className="text-xs lg:text-sm uppercase tracking-[0.3em] text-[#228BE6] font-semibold mb-4 lg:mb-6 font-light">
                 Desarrollador de juegos y especialista en herramientas de Unity
               </div>
               
-              <h1 className="text-9xl font-black mb-8 leading-none">
+              <h1 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-black mb-4 lg:mb-8 leading-tight lg:leading-none">
                 <span className="block text-white">EUCLIDES</span>
                 <span className="block text-white">MARTINEZ</span>
               </h1>
               
-              <div className="w-24 h-1 bg-gradient-to-r from-[#228BE6] to-[#ee6c4d] mb-8" />
+              <div className="w-16 lg:w-24 h-1 bg-gradient-to-r from-[#228BE6] to-[#ee6c4d] mb-6 lg:mb-8 mx-auto lg:mx-0" />
               
-              <p className="text-xl text-gray-300 leading-relaxed mb-12 max-w-2xl">
+              <p className="text-base lg:text-xl text-gray-300 leading-relaxed mb-8 lg:mb-12 max-w-2xl mx-auto lg:mx-0">
                 Desarrollador especializado en <span className="text-[#228BE6] font-semibold">Unity</span> con enfoque en 
                 <span className="text-[#228BE6] font-semibold"> creación de editores y automatizaciones</span>. 
                 Transformo workflows complejos en herramientas intuitivas que potencian la productividad del equipo.
               </p>
               
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="flex items-center gap-3">
-                  <Code className="w-5 h-5 text-white" />
-                  <span className="text-gray-400">Unity & C#</span>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <Code className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
+                  <span className="text-gray-400 text-sm lg:text-base">Unity & C#</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Award className="w-5 h-5 text-white" />
-                  <span className="text-gray-400">Unity Editor</span>
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <Award className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
+                  <span className="text-gray-400 text-sm lg:text-base">Unity Editor</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Layers className="w-5 h-5 text-white" />
-                  <span className="text-gray-400">VR & AR</span>
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <Layers className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
+                  <span className="text-gray-400 text-sm lg:text-base">VR & AR</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Gamepad2 className="w-5 h-5 text-white" />
-                  <span className="text-gray-400">40+ Proyectos (Públicos - Privados)</span>
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <Gamepad2 className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
+                  <span className="text-gray-400 text-sm lg:text-base">40+ Proyectos (Públicos - Privados)</span>
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 lg:gap-3 justify-center lg:justify-start">
                 {['Unity', 'C#', 'VR', 'AR', 'Vuforia', 'Unity Game Services', 'Firebase', 'PlayFab', 'Penpot', 'Adobe XD', 'Camtasia'].map((tech, i) => (
                   <span 
                     key={i}
-                    className="px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 text-sm"
+                    className="px-3 py-1 lg:px-4 lg:py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 text-xs lg:text-sm"
                   >
                     {tech}
                   </span>
@@ -385,7 +443,7 @@ const courses = [
           </div>
         </div>
 
-        {/* PÁGINA 2: PROYECTOS EN GRID */}
+        {/* PÁGINA 2: PROYECTOS RESPONSIVE */}
         <div className={`absolute inset-0 transition-all duration-700 ${
           currentPage === 1 
             ? 'opacity-100 translate-x-0' 
@@ -393,13 +451,15 @@ const courses = [
               ? 'opacity-0 -translate-x-full' 
               : 'opacity-0 translate-x-full'
         }`}>
-          <div className="h-full overflow-y-auto scrollbar-hide px-20 pt-32 pb-32">
-            <h2 className="text-6xl font-bold mb-4 text-white">
+          <div className="h-full overflow-y-auto px-4 lg:px-20 pt-8 lg:pt-32 pb-32">
+            <h2 className="text-3xl lg:text-6xl font-bold mb-4 text-white text-center lg:text-left">
               Proyectos <span className="text-[#228BE6]">Destacados</span>
             </h2>
-            <p className="text-gray-400 mb-12 text-lg">Una muestra representativa de mi trabajo, centrada en la creación, programación y diseño de experiencias interactivas.</p>
+            <p className="text-gray-400 mb-8 lg:mb-12 text-sm lg:text-lg text-center lg:text-left">
+              Una muestra representativa de mi trabajo, centrada en la creación, programación y diseño de experiencias interactivas.
+            </p>
             
-            <div className="grid grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6 xl:gap-8">
               {projects.map((project, index) => (
                 <div
                   key={project.id}
@@ -410,57 +470,61 @@ const courses = [
                     animationDelay: `${index * 0.2}s`
                   }}
                 >
-                  <div className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-500 hover:border-[#228BE6]/50 hover:shadow-2xl hover:shadow-[#228BE6]/20 hover:-translate-y-2">
-                    <div className="relative h-56 overflow-hidden">
-                        {/* CONDICIONAL PARA VIDEO O IMAGEN */}
-                        {project.mediaType === "video" ? (
-                          <div className="relative w-full h-full">
-                            <video 
-                              src={project.image}
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                              muted
-                              loop
-                              autoPlay
-                              playsInline
-                              onContextMenu={(e) => e.preventDefault()}
-                              controlsList="nodownload"
-                              disablePictureInPicture
-                              controls={false}
-                            />
-                            <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-                          </div>
-                        ) : (
-                          <img 
+                  <div className="relative overflow-hidden rounded-xl lg:rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-500 hover:border-[#228BE6]/50 hover:shadow-2xl hover:shadow-[#228BE6]/20 hover:-translate-y-2">
+                    <div className="relative h-48 lg:h-56 overflow-hidden">
+                      {project.mediaType === "video" ? (
+                        <div className="relative w-full h-full">
+                          <video 
                             src={project.image}
-                            alt={project.title}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            muted
+                            loop
+                            autoPlay
+                            playsInline
+                            onContextMenu={(e) => e.preventDefault()}
+                            controlsList="nodownload"
+                            disablePictureInPicture
+                            controls={false}
                           />
-                        )}
+                          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+                        </div>
+                      ) : (
+                        <img 
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b2a] via-[#0d1b2a]/70 to-transparent" />
                       
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="text-xl font-bold text-white mb-2">
+                      <div className="absolute bottom-3 lg:bottom-4 left-3 lg:left-4 right-3 lg:right-4">
+                        <h3 className="text-lg lg:text-xl font-bold text-white mb-1 lg:mb-2 line-clamp-1">
                           {project.title}
                         </h3>
-                        <p className="text-sm text-gray-100 mb-3">
+                        <p className="text-xs lg:text-sm text-gray-100 mb-2 lg:mb-3 line-clamp-2">
                           {project.description}
                         </p>
-                        <h1 className="text-sm text-gray-400">
+                        <div className="text-xs lg:text-sm text-gray-400 line-clamp-1">
                           {project.platform}
-                        </h1>
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="p-5">
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech, i) => (
+                    <div className="p-3 lg:p-5">
+                      <div className="flex flex-wrap gap-1 lg:gap-2">
+                        {project.technologies.slice(0, isMobile ? 3 : project.technologies.length).map((tech, i) => (
                           <span 
                             key={i}
-                            className="px-3 py-1 text-xs rounded-full bg-[#228BE6]/0 text-[#ffffff] border border-[#228BE6]/100"
+                            className="px-2 py-1 lg:px-3 lg:py-1 text-xs rounded-full bg-[#228BE6]/0 text-white border border-[#228BE6]/100"
                           >
                             {tech}
                           </span>
                         ))}
+                        {isMobile && project.technologies.length > 3 && (
+                          <span className="px-2 py-1 text-xs rounded-full bg-[#228BE6]/20 text-white">
+                            +{project.technologies.length - 3}
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -470,7 +534,7 @@ const courses = [
           </div>
         </div>
 
-        {/* PÁGINA 3: EXPERIENCIA - TIMELINE ONDULADO */}
+        {/* PÁGINA 3: EXPERIENCIA RESPONSIVE */}
         <div className={`absolute inset-0 transition-all duration-700 ${
           currentPage === 2 
             ? 'opacity-100 translate-x-0' 
@@ -478,147 +542,185 @@ const courses = [
               ? 'opacity-0 -translate-x-full' 
               : 'opacity-0 translate-x-full'
         }`}>
-          <div className="h-full flex flex-col items-center justify-center px-20">
-            <h2 className="text-6xl font-bold mb-4 text-white">
+          <div className="h-full flex flex-col items-center justify-center px-4 lg:px-20 py-8">
+            <h2 className="text-3xl lg:text-6xl font-bold mb-4 text-white text-center">
               Mi <span className="text-[#228BE6]">Experiencia</span>
             </h2>
-            <p className="text-gray-400 mb-16 text-lg">Julio 2018 - Noviembre 2025</p>
+            <p className="text-gray-400 mb-8 lg:mb-16 text-sm lg:text-lg text-center">Julio 2018 - Noviembre 2025</p>
             
             <div className="relative w-full max-w-6xl">
-              {/* SVG Ondulado */}
-              <svg className="w-full h-32" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path
-                  d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60"
-                  fill="none"
-                  stroke="url(#gradient)"
-                  strokeWidth="2"
-                />
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style={{ stopColor: '#9b59b6', stopOpacity: 1 }} />
-                    <stop offset="33%" style={{ stopColor: '#e74c3c', stopOpacity: 1 }} />
-                    <stop offset="66%" style={{ stopColor: '#f39c12', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#3498db', stopOpacity: 1 }} />
-                  </linearGradient>
-                </defs>
-                
-                {/* Puntos en la onda */}
-                {experience.map((_, index) => (
-                  <circle
-                    key={index}
-                    cx={150 + index * 300}
-                    cy={index % 2 === 0 ? 40 : 80}
-                    r="8"
-                    fill={experience[index].color}
-                    className="animate-pulse"
-                  />
-                ))}
-              </svg>
-
-              {/* Tarjetas de experiencia */}
-              <div className="grid grid-cols-4 gap-6 mt-8">
-                {experience.map((item, index) => (
-                  <div 
-                    key={index}
-                    className="text-center"
-                    style={{
-                      animation: `fadeInUp 0.8s ease-out ${index * 0.2}s both`
-                    }}
-                  >
-                    <div className="p-6 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#5ce1e6]/30 transition-all duration-300">
+              {/* Timeline vertical para móvil, horizontal para desktop */}
+              {isMobile ? (
+                <div className="space-y-8">
+                  {experience.map((item, index) => (
+                    <div 
+                      key={index}
+                      className="relative pl-8 border-l-2 border-[#228BE6]"
+                      style={{
+                        animation: `fadeInUp 0.8s ease-out ${index * 0.2}s both`
+                      }}
+                    >
                       <div 
-                        className="w-3 h-3 rounded-full mx-auto mb-4"
+                        className="absolute -left-2 top-0 w-4 h-4 rounded-full"
                         style={{ backgroundColor: item.color }}
                       />
-                      <div className="text-[#ffffff] font-bold mb-2 text-xs uppercase tracking-wider">
-                        {item.year}
+                      <div className="p-6 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#5ce1e6]/30 transition-all duration-300">
+                        <div className="text-white font-bold mb-2 text-xs uppercase tracking-wider">
+                          {item.year}
+                        </div>
+                        <h3 className="text-xl font-bold text-white mb-1">
+                          {item.company}
+                        </h3>
+                        <div className="text-[#ee6c4d] font-medium mb-2 text-sm">
+                          {item.role}
+                        </div>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                          {item.description}
+                        </p>
                       </div>
-                      <h3 className="text-xl font-bold text-white mb-1">
-                        {item.title}
-                      </h3>
-                      <div className="text-gray-400 font-medium mb-2 text-sm">
-                        {item.company}
-                      </div>
-                      <div className="text-[#ee6c4d] font-medium mb-3 text-sm">
-                        {item.role}
-                      </div>
-                      <p className="text-gray-400 text-xs leading-relaxed">
-                        {item.description}
-                      </p>
                     </div>
+                  ))}
+                </div>
+              ) : (
+                <>
+                  {/* SVG Ondulado para desktop */}
+                  <svg className="w-full h-32 hidden lg:block" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                      d="M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60"
+                      fill="none"
+                      stroke="url(#gradient)"
+                      strokeWidth="2"
+                    />
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style={{ stopColor: '#9b59b6', stopOpacity: 1 }} />
+                        <stop offset="33%" style={{ stopColor: '#e74c3c', stopOpacity: 1 }} />
+                        <stop offset="66%" style={{ stopColor: '#f39c12', stopOpacity: 1 }} />
+                        <stop offset="100%" style={{ stopColor: '#3498db', stopOpacity: 1 }} />
+                      </linearGradient>
+                    </defs>
+                    
+                    {experience.map((_, index) => (
+                      <circle
+                        key={index}
+                        cx={150 + index * 300}
+                        cy={index % 2 === 0 ? 40 : 80}
+                        r="8"
+                        fill={experience[index].color}
+                        className="animate-pulse"
+                      />
+                    ))}
+                  </svg>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6 mt-8">
+                    {experience.map((item, index) => (
+                      <div 
+                        key={index}
+                        className="text-center"
+                        style={{
+                          animation: `fadeInUp 0.8s ease-out ${index * 0.2}s both`
+                        }}
+                      >
+                        <div className="p-4 lg:p-6 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#5ce1e6]/30 transition-all duration-300">
+                          <div 
+                            className="w-3 h-3 rounded-full mx-auto mb-3 lg:mb-4"
+                            style={{ backgroundColor: item.color }}
+                          />
+                          <div className="text-white font-bold mb-2 text-xs uppercase tracking-wider">
+                            {item.year}
+                          </div>
+                          <h3 className="text-lg lg:text-xl font-bold text-white mb-1">
+                            {item.company}
+                          </h3>
+                          <div className="text-[#ee6c4d] font-medium mb-2 text-sm">
+                            {item.role}
+                          </div>
+                          <p className="text-gray-400 text-xs leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              )}
             </div>
           </div>
         </div>
 
-        {/* PÁGINA 4: CURSOS - TIMELINE SCROLLEABLE */}
+        {/* PÁGINA 4: CURSOS RESPONSIVE */}
         <div className={`absolute inset-0 transition-all duration-700 ${
           currentPage === 3 
             ? 'opacity-100 translate-x-0' 
             : 'opacity-0 translate-x-full'
         }`}>
-          <div className="h-full flex flex-col items-center justify-center px-20 py-32">
-            <h2 className="text-6xl font-bold mb-4 text-white">
+          <div className="h-full flex flex-col items-center justify-center px-4 lg:px-20 py-8 lg:py-32">
+            <h2 className="text-3xl lg:text-6xl font-bold mb-4 text-white text-center">
               Cursos & <span className="text-[#228BE6]">Certificaciones</span>
             </h2>
-            <p className="text-gray-400 mb-12 text-lg">Formación continua 2018-2025</p>
+            <p className="text-gray-400 mb-8 lg:mb-12 text-sm lg:text-lg text-center">Formación continua 2018-2025</p>
             
             <div className="relative w-full max-w-6xl">
-              {/* Botones de navegación del timeline */}
-              <button
-                onClick={() => scrollTimeline('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#228BE6]/20 hover:border-[#228BE6] transition-all"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              
-              <button
-                onClick={() => scrollTimeline('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#228BE6]/20 hover:border-[#228BE6] transition-all"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
+              {/* Botones de navegación del timeline solo en desktop */}
+              {!isMobile && (
+                <>
+                  <button
+                    onClick={() => scrollTimeline('left')}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#228BE6]/20 hover:border-[#228BE6] transition-all"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  
+                  <button
+                    onClick={() => scrollTimeline('right')}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#228BE6]/20 hover:border-[#228BE6] transition-all"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </>
+              )}
 
-              {/* Timeline horizontal scrolleable */}
               <div 
                 ref={timelineRef}
-                className="overflow-x-auto scrollbar-hide scroll-smooth"
+                className={`overflow-x-auto scrollbar-hide scroll-smooth ${
+                  isMobile ? 'overflow-x-visible' : ''
+                }`}
                 style={{ scrollbarWidth: 'none' }}
               >
-                <div className="flex gap-6 pb-8 px-16" style={{ minWidth: 'max-content' }}>
+                <div className={`${isMobile ? 'grid grid-cols-1 gap-4' : 'flex gap-6 pb-8 px-4 lg:px-16'}`} 
+                  style={!isMobile ? { minWidth: 'max-content' } : {}}
+                >
                   {courses.map((course, index) => (
                     <div
                       key={index}
-                      className="relative flex-shrink-0 w-72"
+                      className={`${isMobile ? 'w-full' : 'flex-shrink-0 w-72'}`}
                       style={{
                         animation: `floatIdle ${3 + (index % 3)}s ease-in-out infinite`,
                         animationDelay: `${index * 0.1}s`
                       }}
                     >
-                      {/* Línea conectora */}
-                      {index < courses.length - 1 && (
+                      {/* Línea conectora solo en desktop */}
+                      {!isMobile && index < courses.length - 1 && (
                         <div className="absolute top-12 left-full w-6 h-0.5 bg-gradient-to-r from-white/30 to-transparent" />
                       )}
                       
-                      <div className="p-6 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#228BE6]/30 transition-all duration-300 h-full">
-                        <div className="flex items-center gap-3 mb-4">
+                      <div className="p-4 lg:p-6 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-[#228BE6]/30 transition-all duration-300 h-full">
+                        <div className="flex items-center gap-3 mb-3 lg:mb-4">
                           <div 
-                            className="w-3 h-3 rounded-full animate-pulse"
+                            className="w-2 h-2 lg:w-3 lg:h-3 rounded-full animate-pulse"
                             style={{ backgroundColor: course.color }}
                           />
-                          <div className="text-[#ffffff] font-bold text-sm">
+                          <div className="text-white font-bold text-xs lg:text-sm">
                             {course.year}
                           </div>
                         </div>
                         
-                        <h3 className="text-lg font-bold text-white mb-2 leading-tight">
+                        <h3 className="text-base lg:text-lg font-bold text-white mb-2 leading-tight">
                           {course.title}
                         </h3>
                         
-                        <div className="flex items-center gap-2 text-gray-400 text-sm">
-                          <BookOpen className="w-4 h-4" />
+                        <div className="flex items-center gap-2 text-gray-400 text-xs lg:text-sm">
+                          <BookOpen className="w-3 h-3 lg:w-4 lg:h-4" />
                           <span>{course.institution}</span>
                         </div>
                       </div>
@@ -631,29 +733,29 @@ const courses = [
         </div>
       </div>
 
-      {/* Botones de navegación */}
-      <div className="absolute bottom-12 left-0 right-0 flex items-center justify-center gap-8 z-30">
+      {/* Botones de navegación responsive */}
+      <div className="fixed bottom-4 lg:bottom-12 left-0 right-0 flex items-center justify-center gap-4 lg:gap-8 z-30 px-4">
         <button
           onClick={prevPage}
           disabled={currentPage === 0}
-          className={`flex items-center gap-2 px-6 py-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
+          className={`flex items-center gap-2 px-4 py-2 lg:px-6 lg:py-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
             currentPage === 0
               ? 'bg-white/5 border-white/10 text-gray-600 cursor-not-allowed'
               : 'bg-white/10 border-[#228BE6]/30 text-white hover:bg-[#228BE6]/20 hover:border-[#228BE6] hover:shadow-lg hover:shadow-[#228BE6]/30'
           }`}
         >
-          <ChevronLeft className="w-5 h-5" />
-          <span className="font-medium">Back</span>
+          <ChevronLeft className="w-4 h-4 lg:w-5 lg:h-5" />
+          <span className="text-sm lg:text-base font-medium">Back</span>
         </button>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2 lg:gap-3">
           {[0, 1, 2, 3].map((i) => (
             <button
               key={i}
               onClick={() => setCurrentPage(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 lg:w-3 lg:h-3 rounded-full transition-all duration-300 ${
                 currentPage === i
-                  ? 'bg-[#228BE6] w-8 shadow-lg shadow-[#228BE6]/50'
+                  ? 'bg-[#228BE6] w-6 lg:w-8 shadow-lg shadow-[#228BE6]/50'
                   : 'bg-white/20 hover:bg-white/40'
               }`}
             />
@@ -663,81 +765,77 @@ const courses = [
         <button
           onClick={nextPage}
           disabled={currentPage === 3}
-          className={`flex items-center gap-2 px-6 py-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
+          className={`flex items-center gap-2 px-4 py-2 lg:px-6 lg:py-3 rounded-full backdrop-blur-md border transition-all duration-300 ${
             currentPage === 3
               ? 'bg-white/5 border-white/10 text-gray-600 cursor-not-allowed'
               : 'bg-white/10 border-[#228BE6]/30 text-white hover:bg-[#228BE6]/20 hover:border-[#228BE6] hover:shadow-lg hover:shadow-[#228BE6]/30'
           }`}
         >
-          <span className="font-medium">Next</span>
-          <ChevronRight className="w-5 h-5" />
+          <span className="text-sm lg:text-base font-medium">Next</span>
+          <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5" />
         </button>
       </div>
 
-      {/* POPUP DE PROYECTO */}
+      {/* POPUP RESPONSIVE */}
       {selectedProject && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-8 bg-black/60 backdrop-blur-xl animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 lg:p-8 bg-black/60 backdrop-blur-xl animate-fadeIn"
           onClick={() => setSelectedProject(null)}
         >
           <div 
-            className="relative max-w-4xl w-full max-h-[85vh] overflow-y-auto bg-[#2F3845]/50 backdrop-blur-2xl rounded-3xl border border-[#228BE6]/30 shadow-2xl shadow-[#228BE6]/20 animate-scaleIn scrollbar-hide"
+            className="relative w-full max-w-2xl lg:max-w-4xl max-h-[90vh] lg:max-h-[85vh] overflow-y-auto bg-[#2F3845]/50 backdrop-blur-2xl rounded-xl lg:rounded-3xl border border-[#228BE6]/30 shadow-2xl shadow-[#228BE6]/20 animate-scaleIn scrollbar-hide"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedProject(null)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-[#228BE6]/20 text-white hover:text-[#228BE6] transition-all duration-300 border border-white/10 hover:border-[#228BE6]/50 z-50"
+              className="absolute top-3 lg:top-6 right-3 lg:right-6 p-2 rounded-full bg-white/5 hover:bg-[#228BE6]/20 text-white hover:text-[#228BE6] transition-all duration-300 border border-white/10 hover:border-[#228BE6]/50 z-50"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 lg:w-6 lg:h-6" />
             </button>
 
-            <div className="p-10">
-          {/* CONDICIONAL PARA VIDEO O IMAGEN EN EL POPUP */}
-            {selectedProject.mediaType === "video" ? (
-              <div className="relative">
-                <video 
-                  src={selectedProject.image}
-                  className="w-full h-96 object-cover rounded-2xl mb-8"
-                  controls
-                  controlsList="nodownload nofullscreen noremoteplayback"
-                  onContextMenu={(e) => e.preventDefault()}
-                  disablePictureInPicture
-                  playsInline
-                />
-                <div className="absolute bottom-4 right-4 bg-black/50 px-3 py-1 rounded-lg text-white text-sm">
-                  
+            <div className="p-4 lg:p-10">
+              {selectedProject.mediaType === "video" ? (
+                <div className="relative">
+                  <video 
+                    src={selectedProject.image}
+                    className="w-full h-48 lg:h-96 object-cover rounded-xl lg:rounded-2xl mb-4 lg:mb-8"
+                    controls
+                    controlsList="nodownload nofullscreen noremoteplayback"
+                    onContextMenu={(e) => e.preventDefault()}
+                    disablePictureInPicture
+                    playsInline
+                  />
                 </div>
-              </div>
               ) : (
                 <img 
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="w-full h-96 object-cover rounded-2xl mb-8"
+                  className="w-full h-48 lg:h-96 object-cover rounded-xl lg:rounded-2xl mb-4 lg:mb-8"
                 />
               )}
 
-              <h2 className="text-5xl font-bold text-white mb-3">
+              <h2 className="text-2xl lg:text-5xl font-bold text-white mb-2 lg:mb-3">
                 {selectedProject.title}
               </h2>
               
-              <div className="text-[#228BE6] font-medium text-xl mb-6">
+              <div className="text-[#228BE6] font-medium text-lg lg:text-xl mb-4 lg:mb-6">
                 {selectedProject.role}
               </div>
 
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+              <p className="text-gray-300 text-sm lg:text-lg mb-6 lg:mb-8 leading-relaxed">
                 {selectedProject.fullDescription}
               </p>
 
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <div className="w-1 h-6 bg-gradient-to-b from-[#228BE6] to-[#5ce1e6]" />
+              <div className="mb-6 lg:mb-8">
+                <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 lg:mb-4 flex items-center gap-2">
+                  <div className="w-1 h-4 lg:h-6 bg-gradient-to-b from-[#228BE6] to-[#5ce1e6]" />
                   Tecnologías
                 </h3>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 lg:gap-3">
                   {selectedProject.technologies.map((tech, i) => (
                     <span 
                       key={i}
-                      className="px-5 py-2 rounded-full bg-[#228BE6]/0 text-[#ffffff] border border-[#228BE6]/100 font-medium text-lg"
+                      className="px-3 py-1 lg:px-5 lg:py-2 rounded-full bg-[#228BE6]/0 text-white border border-[#228BE6]/100 text-sm lg:text-base font-medium"
                     >
                       {tech}
                     </span>
@@ -754,12 +852,26 @@ const courses = [
           background: radial-gradient(circle at center, #2F3845 0%, #1B1B1B 100%);
         }
 
+        .line-clamp-1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
         @keyframes floatIdle {
           0%, 100% {
             transform: translateY(0px);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
           }
         }
 
@@ -782,17 +894,6 @@ const courses = [
           to {
             opacity: 1;
             transform: translateY(0);
-          }
-        }
-
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
           }
         }
 
